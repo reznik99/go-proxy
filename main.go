@@ -53,8 +53,7 @@ func authenticateProxyUser(w http.ResponseWriter, r *http.Request, proxyUsername
 	if username == proxyUsername && password == proxyPassword {
 		return nil
 	}
-	// If the Authentication header is not present or is invalid
-	// w.Header().Set("WWW-Authenticate", `Basic realm="restricted", charset="UTF-8"`)
+	// If the Authentication header is not present or is invalid, ask browser for creds
 	w.Header().Set("Proxy-Authenticate", "Basic")
 	return errors.New("Unauthorized")
 }
